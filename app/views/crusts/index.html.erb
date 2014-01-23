@@ -1,0 +1,23 @@
+<h1>Listing crusts</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @crusts.each do |crust| %>
+  <tr>
+    <td><%= crust.name %></td>
+    <td><%= link_to 'Show', crust %></td>
+    <td><%= link_to 'Edit', edit_crust_path(crust) %></td>
+    <td><%= link_to 'Destroy', crust, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Crust', new_crust_path %>

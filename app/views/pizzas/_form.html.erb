@@ -1,0 +1,35 @@
+<%= form_for(@pizza) do |f| %>
+  <% if @pizza.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pizza.errors.count, "error") %> prohibited this pizza from being saved:</h2>
+
+      <ul>
+      <% @pizza.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :crust_id %><br />
+    <%= f.select :crust_id, @crusts.collect{ |c| [c.name, c.id]} %>
+  </div>
+  <div class="field">
+    <% for topping in @toppings %>
+      <%= check_box_tag "pizza[topping_ids][]", topping.id, @pizza.toppings.include?(topping) %>
+      <%= topping.name %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
